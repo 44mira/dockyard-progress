@@ -117,7 +117,7 @@ end
 ```elixir
 defmodule Pokemon do
   @moduledoc """
-  Pokemon
+  Pokemon struct
 
   ## Examples
       iex> attacker = %Pokemon{name: "Charmander", type: :fire, health: 20.0, attack: 5, speed: 20}
@@ -125,9 +125,30 @@ defmodule Pokemon do
       iex> Pokemon.attack(attacker, defender)
       %Pokemon{name: "Bulbasaur", type: :grass, health: 10.0, attack: 5, speed: 20}
   """
-  defstruct []
+  defstruct [:name, :type, :health, :attack, :speed]
 
-  def attack(attacker, defender) do
+  @doc """
+  Makes `attacker` attack `defender`. Dealing `a_attack` damage affected by their types.
+  Super-effective attacks get *2, not effective attacks get /2.
+
+  Returns modified `defender`
+  """
+  def attack(
+        _attacker = %{type: a_type, attack: a_attack},
+        defender = %{type: d_type, health: d_health}
+      ) do
+    damage =
+      a_attack *
+        case {a_type, d_type} do
+          # matching types
+          {type, type} -> 1
+          {:fire, :grass} -> 2
+          {:water, :fire} -> 2
+          {:grass, :water} -> 2
+          _not_effective -> 0.5
+        end
+
+    %Pokemon{defender | health: d_health - damage}
   end
 end
 ```
@@ -135,7 +156,9 @@ end
 Consider using the following Elixir cell to test your solution.
 
 ```elixir
-
+attacker = %Pokemon{name: "Charmander", type: :fire, health: 20.0, attack: 5, speed: 20}
+defender = %Pokemon{name: "Bulbasaur", type: :grass, health: 20.0, attack: 5, speed: 20}
+Pokemon.attack(attacker, defender)
 ```
 
 ### Pokemon Instances
@@ -186,7 +209,11 @@ Pokemon.attack(charmander, bulbasaur)
 Enter your solution below.
 
 ```elixir
+charmander = %Pokemon{name: "Charmander", type: :fire, health: 20.0, attack: 5, speed: 20}
+bulbasaur = %Pokemon{name: "Bulbasaur", type: :grass, health: 20.0, attack: 5, speed: 20}
+squirtle = %Pokemon{name: "Squirtle", type: :water, health: 20.0, attack: 5, speed: 20}
 
+Pokemon.attack(bulbasaur, squirtle)
 ```
 
 ## Commit Your Progress
