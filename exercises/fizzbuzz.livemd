@@ -73,7 +73,7 @@ FizzBuzz.run(1..15)
 
 Enter your solution below.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=QPZ0pIK_wsc&ab_channel=TomScott\")","title":"FizzBuzz"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9UVBaMHBJS193c2MmYWJfY2hhbm5lbD1Ub21TY290dFwiKSIsInRpdGxlIjoiRml6ekJ1enoifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=QPZ0pIK_wsc&ab_channel=TomScott")
@@ -92,7 +92,15 @@ defmodule FizzBuzz do
     iex> FizzBuzz.run(10..15)
     ["buzz", 11, "fizz", 13, 14, "fizzbuzz"]
   """
+  # prefer keyword list over map because order matters
+  @divs [fizz: 3, buzz: 5]
   def run(range) do
+    Enum.map(range, fn n ->
+      # comprehension on divisible
+      res = for {word, dividend} when rem(n, dividend) == 0 <- @divs, do: word
+      # atoms joined become string
+      unless Enum.empty?(res), do: Enum.join(res), else: n
+    end)
   end
 end
 ```
