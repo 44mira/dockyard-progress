@@ -380,7 +380,7 @@ Return each result from `1` to `5` by changing the `condition` variable below.
 ```elixir
 condition = nil
 
-case condition do
+case {1, nil, %{key: [1, nil, nil]}} do
   [1, 2, 3] -> 1
   [_head | _tail] -> 2
   {_, _} -> 3
@@ -517,7 +517,12 @@ end
 </details>
 
 ```elixir
-
+cond grade do
+  grade >= 85 -> "A"
+  grade >= 70 -> "B"
+  grade >= 55 -> "C"
+  grade >= 1 -> "D"
+end
 ```
 
 ## Unless
@@ -571,7 +576,11 @@ In the Elixir cell below
 * Create an `unless` statement. which returns `"awake"` unless `tired`.
 
 ```elixir
+tired = false
 
+unless tired do
+  "awake"
+end
 ```
 
 ## Commit Your Progress
