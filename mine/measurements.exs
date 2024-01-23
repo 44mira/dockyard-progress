@@ -34,9 +34,8 @@ defmodule Measurements do
   """
   def increased(measurements) do
     measurements
-    |> Enum.chunk_every(2, 1, :discard)
-    |> Enum.filter(fn [a,b] -> b > a end)
-    |> length
+    |> increments
+    |> Enum.count(& &1>0)
   end
 
   @doc """
@@ -70,5 +69,5 @@ defmodule Measurements do
     iex> Measurements.average([2, 10])
     6.0
   """
-  def average(measurements), do: Enum.sum(measurements) / length(measurements)
+  def average(measurements), do: div(Enum.sum(measurements), length(measurements))
 end
