@@ -87,7 +87,10 @@ flowchart
 Enter your solution below.
 
 ```elixir
+nums = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
+Enum.map(1..10, fn _ -> Enum.random(0..9) end)
+|> Enum.map(&Enum.at(nums, &1))
 ```
 
 ## Commit Your Progress
