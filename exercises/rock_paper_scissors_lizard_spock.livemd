@@ -32,7 +32,7 @@ Mix.install([
 
 ## Rock Paper Scissors Lizard Spock
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=_PUEoDYpUyQ\")","title":"Rock Paper Scissors Lizard Spock. A Brief Introduction."},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9X1BVRW9EWXBVeVFcIikiLCJ0aXRsZSI6IlJvY2sgUGFwZXIgU2Npc3NvcnMgTGl6YXJkIFNwb2NrLiBBIEJyaWVmIEludHJvZHVjdGlvbi4ifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=_PUEoDYpUyQ")
@@ -127,8 +127,12 @@ defmodule RockPaperScissorsLizardSpock do
       iex> RockPaperScissorsLizardSpock.beats?(:spock, :paper)
       false
   """
-  def beats?(guess1, guess2) do
-  end
+  def beats?(:rock, x) when x in [:scissors, :lizard], do: true
+  def beats?(:paper, x) when x in [:rock, :spock], do: true
+  def beats?(:scissors, x) when x in [:paper, :lizard], do: true
+  def beats?(:lizard, x) when x in [:paper, :spock], do: true
+  def beats?(:spock, x) when x in [:scissors, :rock], do: true
+  def beats?(_, _), do: false
 
   @doc """
   ## Examples
@@ -138,6 +142,11 @@ defmodule RockPaperScissorsLizardSpock do
       iex> "Draw!" = RockPaperScissorsLizardSpock.play(:lizard, :lizard)
   """
   def play(player1, player2) do
+    cond do
+      beats?(player1, player2) -> "Player 1 Wins!"
+      beats?(player2, player1) -> "Player 2 Wins!"
+      true -> "Draw!"
+    end
   end
 end
 ```
