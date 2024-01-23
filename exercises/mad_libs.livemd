@@ -56,7 +56,10 @@ blank3 = "code"
 Enter your solution below.
 
 ```elixir
-
+word1 = "human"
+word2 = "coffee"
+word3 = "energy"
+"A programmer is a #{word1} that turns #{word2} into #{word3}"
 ```
 
 ## String Interpolation Madlib
