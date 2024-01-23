@@ -80,7 +80,7 @@ In the Elixir cell below, create a string `"Hello, world!"`. This is a rite of p
 programmer.
 
 ```elixir
-
+"Hello, world!"
 ```
 
 ## Multiline Strings
@@ -141,7 +141,7 @@ Replace `nil` with your answer.
 </details>
 
 ```elixir
-
+"Hi " <> "Peter"
 ```
 
 ### String Interpolation
@@ -164,7 +164,7 @@ Otherwise, it's easy to make mistakes.
 Notice that there's a grammar mistake below that could easily be missed when using string concatenation.
 
 ```elixir
-"I have" <> "8" <> "apples"
+"I have " <> "8" <> " apples"
 ```
 
 ### Your Turn
@@ -181,7 +181,7 @@ In the Elixir cell below, use **string interpolation** to say `I have #{X - 1} c
 </details>
 
 ```elixir
-answer = nil
+answer = "I have #{4 - 1} classmates."
 ```
 
 ## Escaping Characters
@@ -201,7 +201,7 @@ There are other special characters such as backslashes `\`, or interpolation syn
 ```elixir
 string = "Use \#{} to interpolate a value in a string"
 
-IO.puts(string)
+IO.inspect(string)
 ```
 
 ```elixir
