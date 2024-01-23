@@ -65,7 +65,7 @@ small = 5
 Enter your solution below.
 
 ```elixir
-
+{small, medium, large} = {5, 20, 30}
 ```
 
 ## Small, Medium, Large
@@ -95,7 +95,7 @@ small + medium + large
 Enter your answer in the code cell below.
 
 ```elixir
-
+small + medium + large
 ```
 
 ## Multiples
@@ -114,7 +114,7 @@ small * 10 + medium * 5 + large * 3
 Enter your answer below.
 
 ```elixir
-
+10 * small + 5 * medium + 3 * large
 ```
 
 ## Progress Bar
@@ -145,7 +145,10 @@ points = small + medium
 Enter your answer below.
 
 ```elixir
+goal = 40
+points = small + medium
 
+points / goal * 100
 ```
 
 ## Penalties And Rewards
@@ -172,7 +175,7 @@ small * 1.6 * 3 + medium * 2 + large * 2 * 0.5
 Enter your answer below.
 
 ```elixir
-
+small * 1.6 * 3 + medium * 2 + large * 0.5 * 2
 ```
 
 ## Bonus: Add Your Own Feature
