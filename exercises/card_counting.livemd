@@ -84,7 +84,7 @@ high = 1
 Enter your solution below.
 
 ```elixir
-
+{low, normal, high} = {-1, 0, 1}
 ```
 
 ## High Card
@@ -104,7 +104,8 @@ initial_count + high
 Enter your solution below.
 
 ```elixir
-
+count = 0
+count + high
 ```
 
 ## Low Card
@@ -124,7 +125,7 @@ initial_count + low
 Enter your solution below.
 
 ```elixir
-
+count + low
 ```
 
 ## Multiple Cards
@@ -146,7 +147,7 @@ You could omit the **normal** cards or allow **high** and **low** cards to balan
 Enter your solution below.
 
 ```elixir
-
+count + high * 5 + low * 2 + normal * 2
 ```
 
 ## Bonus: Determining Card Values
@@ -188,7 +189,19 @@ You could omit the **normal** cards or allow **high** and **low** cards to balan
 Enter your solution below.
 
 ```elixir
+random_card = Enum.take_random(1..13, 3)
 
+IO.inspect(random_card)
+
+random_card
+|> Enum.map(fn a ->
+  cond do
+    a <= 6 -> low
+    a <= 9 -> normal
+    a -> high
+  end
+end)
+|> Enum.sum()
 ```
 
 ## Commit Your Progress
