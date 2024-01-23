@@ -98,8 +98,7 @@ defmodule Filter do
     iex> Filter.integers([1, 2, %{}, {}, []])
     [1, 2]
   """
-  def integers(list) do
-  end
+  def integers(list), do: Enum.filter(list, &is_integer/1)
 
   @doc """
   Filter in floats in list.
@@ -109,8 +108,7 @@ defmodule Filter do
     iex> Filter.floats([1, 2, %{}, {}, [], 1.2, 3.2])
     [1.2, 3.2]
   """
-  def floats(list) do
-  end
+  def floats(list), do: Enum.filter(list, &is_float/1)
 
   @doc """
   Filter in numbers and floats in list.
@@ -120,8 +118,7 @@ defmodule Filter do
     iex> Filter.numbers([1, 2, %{}, {}, [], 1.2, 3.2])
     [1, 2, 1.2, 3.2]
   """
-  def numbers(list) do
-  end
+  def numbers(list), do: Enum.filter(list, fn a -> is_float(a) or is_integer(a) end)
 
   @doc """
   Filter in atoms in list.
@@ -131,8 +128,7 @@ defmodule Filter do
     iex> Filter.atoms([1, 2, %{}, {}, [], :first_atom, 1.2, 3.2, :second_atom])
     [:first_atom, :second_atom]
   """
-  def atoms(list) do
-  end
+  def atoms(list), do: Enum.filter(list, &is_atom/1)
 
   @doc """
   Filter in lists and keyword lists in list.
@@ -142,8 +138,7 @@ defmodule Filter do
     iex> Filter.lists([1, 2, %{}, {}, [], 1.2, 3.2, :atom, [1, 2], [4, 5, 6]])
     [[], [1, 2], [4, 5, 6]]
   """
-  def lists(list) do
-  end
+  def lists(list), do: Enum.filter(list, &is_list/1)
 
   @doc """
   Filter in maps in list.
@@ -153,8 +148,7 @@ defmodule Filter do
     iex> Filter.maps([1, 2, %{}, {}, [], 1.2, 3.2, :atom, %{key: "value"}])
     [%{}, %{key: "value"}]
   """
-  def maps(list) do
-  end
+  def maps(list), do: Enum.filter(list, &is_map/1)
 
   @doc """
   Filter in keyword lists.
@@ -164,8 +158,7 @@ defmodule Filter do
     iex> Filter.keyword_lists([1, 2, %{}, {}, [], 1.2, 3.2, :atom, %{key: "value"}, [key: "value"]])
     [[], [key: "value"]]
   """
-  def keyword_lists(list) do
-  end
+  def keyword_lists(list), do: Enum.filter(list, &Keyword.keyword?/1)
 end
 ```
 
