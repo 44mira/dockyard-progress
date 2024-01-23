@@ -120,7 +120,7 @@ end
 Call the `MutliParamExample.call/3` function with different arguments.
 
 ```elixir
-
+MultiParamExample.call(1, 2, 3)
 ```
 
 ## Internal Module Functions
@@ -318,7 +318,11 @@ end
 Enter your solution below.
 
 ```elixir
-
+defmodule Languages.Cowboy do
+  def greeting do
+    "Yeehaw"
+  end
+end
 ```
 
 ### Nested Modules
@@ -516,7 +520,10 @@ end
 </details>
 
 ```elixir
-
+defmodule Math do
+  def add(x, y), do: x + y
+  def add(x, y, z), do: x + y + z
+end
 ```
 
 ## Default Arguments
@@ -583,7 +590,11 @@ Greeting.hello("Andrew")
 ```
 
 ```elixir
+defmodule Greeting do
+  def hello(name \\ "Jon"), do: "Hello #{name}!"
+end
 
+Greeting.hello("Andrew")
 ```
 
 ## Documentation
@@ -665,7 +676,7 @@ defmodule DoctestFailure do
   ## Examples
 
     iex> DoctestFailure.test()
-    "expected return value"
+    "actual return value"
   """
   def test do
     "actual return value"
