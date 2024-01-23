@@ -141,12 +141,10 @@ defmodule RockPaperScissorsLizardSpock do
       iex> "Player 2 Wins!" = RockPaperScissorsLizardSpock.play(:lizard, :rock)
       iex> "Draw!" = RockPaperScissorsLizardSpock.play(:lizard, :lizard)
   """
+  def play(player1, player2) when player1 == player2, do: "Draw!"
+
   def play(player1, player2) do
-    cond do
-      beats?(player1, player2) -> "Player 1 Wins!"
-      beats?(player2, player1) -> "Player 2 Wins!"
-      true -> "Draw!"
-    end
+    if beats?(player1, player2), do: "Player 1 Wins!", else: "Player 2 Wins!"
   end
 end
 ```
