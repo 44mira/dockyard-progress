@@ -125,12 +125,28 @@ end
 
 ```elixir
 defmodule Products do
+  @prods ["computer", "phone", "tablet"]
+  @filt [:min, :max, :name]
+
   def all_items do
+    for _ <- 1..100, do: %{name: Enum.random(@prods), price: Enum.random(1..100)}
   end
 
-  def search(items, filters) do
+  def search(items, filters \\ []) do
+    %{name: n, max: mx, min: mn} = Enum.into(filters, Map.new(@filt, fn a -> {a, nil} end))
+
+    for %{name: ni, price: pi} = item <- items,
+        !n || ni == n,
+        !mx || pi <= mx,
+        !mn || pi >= mn,
+        do: item
   end
 end
+```
+
+```elixir
+products = Products.all_items()
+Products.search(products, max: 5)
 ```
 
 ## Commit Your Progress
