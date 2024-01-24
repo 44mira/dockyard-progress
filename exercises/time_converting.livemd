@@ -89,8 +89,10 @@ defmodule TimeConverter do
     86400
 
   """
-  def to_seconds(amount, unit) do
-  end
+  def to_seconds(amount, :seconds), do: amount
+  def to_seconds(amount, :minutes), do: amount * 60
+  def to_seconds(amount, :hours), do: (amount * 60) |> to_seconds(:minutes)
+  def to_seconds(amount, :days), do: (amount * 24) |> to_seconds(:hours)
 
   @doc """
   Convert a number of seconds to a unit of time.
@@ -111,8 +113,10 @@ defmodule TimeConverter do
     1.0
 
   """
-  def from_seconds(amount, unit) do
-  end
+  def from_seconds(amount, :seconds), do: amount / 1
+  def from_seconds(amount, :minutes), do: amount / 60
+  def from_seconds(amount, :hours), do: (amount / 60) |> from_seconds(:minutes)
+  def from_seconds(amount, :days), do: (amount / 24) |> from_seconds(:hours)
 end
 ```
 
