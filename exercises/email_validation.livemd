@@ -104,8 +104,7 @@ defmodule Email do
     iex> Email.valid?("string@string.")
     false
   """
-  def valid?(email) do
-  end
+  def valid?(email), do: Regex.match?(~r/.+@.+\..+/, email)
 end
 ```
 
