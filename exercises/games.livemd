@@ -50,6 +50,10 @@ git commit -m "initialize mix project"
 
 You should create a [new GitHub repository](https://github.com/new) for this project so that you can push your changes and manage it using source control.
 
+```elixir
+
+```
+
 ## Commit Your Progress
 
 DockYard Academy now recommends you use the latest [Release](https://github.com/DockYard-Academy/curriculum/releases) rather than forking or cloning our repository.
