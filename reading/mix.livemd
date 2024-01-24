@@ -466,6 +466,10 @@ We can change project behavior or configuration based on the current environment
 if you had SMS (text) notifications in your project, you might want to disable them in the `:dev` and `:test`
 environment to ensure that developers don't accidentally send out text messages to users.
 
+```elixir
+
+```
+
 ## Further Reading
 
 For more on [Mix](https://hexdocs.pm/mix/Mix.html), consider reading the following.
