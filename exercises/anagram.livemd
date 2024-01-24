@@ -83,6 +83,9 @@ defmodule Anagram do
     true
   """
   def anagram?(word, possible_anagram) do
+    w1 = String.to_charlist(word) |> Enum.sort()
+    w2 = String.to_charlist(possible_anagram) |> Enum.sort()
+    w1 == w2
   end
 
   @doc """
@@ -100,6 +103,7 @@ defmodule Anagram do
     []
   """
   def filter_anagrams(word_list, anagram) do
+    for word <- word_list, anagram?(word, anagram), do: word
   end
 end
 ```
@@ -128,8 +132,22 @@ defmodule AnagramSolver do
     iex> AnagramSolver.solve("abc")
     ["abc", "acb", "bac", "bca", "cab", "cba"]
   """
-  def solve(string) do
+  def solve(str) do
+    str
+    |> to_charlist
+    |> perms
+    |> Enum.map(&to_string/1)
+    |> Enum.sort()
   end
+
+  defp rots(xs) do
+    xs
+    |> Stream.iterate(fn [h | t] -> t ++ [h] end)
+    |> Enum.take(length(xs))
+  end
+
+  defp perms([]), do: [[]]
+  defp perms([h | t]), do: perms(t) |> Enum.flat_map(&rots([h | &1]))
 end
 ```
 
