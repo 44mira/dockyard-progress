@@ -88,7 +88,7 @@ end
 Change the value of `user` below to hit every case in the `else` clause (one at a time.)
 
 ```elixir
-user = %{name: "Jon", is_admin: false}
+user = :poop
 
 with %{name: name, is_admin: true} <- user do
   IO.puts("admin #{name} is authorized.")
@@ -119,17 +119,16 @@ However, we want you to be aware of this pattern so that you are familiar with i
 Change `value` to trigger every else clause.
 
 ```elixir
-value = "example"
-
-with {:not_binary, true} <- {:not_binary, is_binary(value)},
-     {:too_long, true} <- {:too_long, String.length(value) <= 10},
-     {:too_short, true} <- {:too_short, 2 <= String.length(value)} do
-  IO.puts("success")
-else
-  {:not_binary, _} -> IO.puts("value is not binary")
-  {:too_long, _} -> IO.puts("value is too long")
-  {:too_short, _} -> IO.puts("value is too short")
-end
+value =
+  with {:not_binary, true} <- {:not_binary, is_binary(value)},
+       {:too_long, true} <- {:too_long, String.length(value) <= 10},
+       {:too_short, true} <- {:too_short, 2 <= String.length(value)} do
+    IO.puts("success")
+  else
+    {:not_binary, _} -> IO.puts("value is not binary")
+    {:too_long, _} -> IO.puts("value is too long")
+    {:too_short, _} -> IO.puts("value is too short")
+  end
 ```
 
 ## Commit Your Progress
