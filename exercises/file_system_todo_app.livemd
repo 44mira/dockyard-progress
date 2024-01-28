@@ -79,6 +79,8 @@ defmodule TodoList do
       []
   """
   def list do
+    File.stream!("todo.txt")
+    |> Enum.into([], &String.trim/1)
   end
 
   @doc """
@@ -92,6 +94,12 @@ defmodule TodoList do
       ["task 2", "task 1"]
   """
   def add(item) do
+    result =
+      File.stream!("todo.txt")
+      |> Stream.concat("#{item}\n")
+      |> Enum.join()
+
+    File.write!("todo.txt", result, [:write])
   end
 
   @doc """
@@ -105,6 +113,12 @@ defmodule TodoList do
       ["task 2", "task 1"]
   """
   def complete(item) do
+    result =
+      File.stream!("todo.txt")
+      |> Stream.reject(fn n -> String.trim(n) == item end)
+      |> Enum.join()
+
+    File.write!("todo.txt", result)
   end
 end
 ```
