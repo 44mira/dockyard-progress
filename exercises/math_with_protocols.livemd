@@ -133,6 +133,24 @@ defprotocol Math do
   def subtract(value1, value2)
 end
 
+defimpl Math, for: Integer do
+  def add(a, b), do: a + b
+  def subtract(a, b), do: a - b
+end
+
+defimpl Math, for: List do
+  def add(a, b), do: a ++ b
+  def subtract(a, b), do: a -- b
+end
+
+defimpl Math, for: BitString do
+  def add(a, b), do: a <> b
+
+  def subtract(a, b) do
+    (String.graphemes(a) -- String.graphemes(b)) |> Enum.join()
+  end
+end
+
 # Define Implementations...
 ```
 
