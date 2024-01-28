@@ -152,7 +152,12 @@ We can use the match operator anytime we have a value bound to a parameter or va
 Create a `case` statement that will return the first element in a 2 element tuple, or the first element in 2 element a list.
 
 ```elixir
+tup = [2, 3]
 
+case tup do
+  {a, _} -> a
+  [a, _] -> a
+end
 ```
 
 Use pattern matching to ensure the `Check.must_have_elements!/1` function returns true when called with a list that has more than one element and otherwise causes a [FunctionClauseError](https://hexdocs.pm/elixir/FunctionClauseError.html).
@@ -186,7 +191,7 @@ defmodule Check do
       iex> Check.must_have_elements!([])
       ** (FunctionClauseError) no function clause matching in Check.must_have_elements!/1
   """
-  def must_have_elements!(list) do
+  def must_have_elements!([_ | _]) do
     true
   end
 end
@@ -291,8 +296,9 @@ defmodule Greeter do
       iex> Greeter.hello(["Swamy", "Jeff", "Jeremy"])
       "Hello everyone!"
   """
-  def hello(names) do
-  end
+  def hello([name]), do: "Hi #{name}!"
+  def hello([a, b]), do: "Hi #{a}, Hello #{b}!"
+  def hello(_), do: "Hello everyone!"
 end
 ```
 
@@ -354,7 +360,11 @@ end)
 </details>
 
 ```elixir
-
+[{:double, 2}, {:halve, 10}, {:double, 4}]
+|> Enum.map(fn
+  {:double, n} -> n * 2
+  {:halve, n} -> div(n, 2)
+end)
 ```
 
 ## Pattern Matching Vs. If
@@ -523,7 +533,7 @@ actual = {"hello", "hi"}
 expected = {"hello"}
 actual = {"hello", "hi"}
 
-expected = actual
+^expected = actual
 ```
 
 ## Further Reading
