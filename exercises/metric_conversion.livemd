@@ -83,8 +83,9 @@ end
 
 ```elixir
 defmodule Metric do
-  def convert(from, to) do
-  end
+  def convert({f, n}, f), do: n
+  def convert({:centimeter, n}, :meter), do: n / 100
+  def convert({:centimeter, n}, :millimeter), do: n * 10
 end
 ```
 
