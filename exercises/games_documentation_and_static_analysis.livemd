@@ -70,6 +70,10 @@ Run the following command to generate project documentation. Re-run the command 
 mix docs
 ```
 
+```elixir
+
+```
+
 ## Commit Your Progress
 
 DockYard Academy now recommends you use the latest [Release](https://github.com/DockYard-Academy/curriculum/releases) rather than forking or cloning our repository.
