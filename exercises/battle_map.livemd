@@ -100,6 +100,9 @@ end
 
 ```elixir
 # Implementation Goes Here:
+defimpl Character, for: Barbarian do
+  def can_attack?(_barbarian, {x, y}, {a, b}), do: abs(x - a) <= 2 and abs(y - b) <= 2
+end
 
 # You May Use The Following Test Suite To Validate Your Solution.
 ExUnit.start(auto_run: false)
@@ -163,6 +166,11 @@ Create a `Wizard` implementation for the `Character` protocol.
 
 ```elixir
 # Implementation Goes Here:
+defimpl Character, for: Wizard do
+  def can_attack?(_wizard, {x, _}, {x, _}), do: true
+  def can_attack?(_wizard, {_, y}, {_, y}), do: true
+  def can_attack?(_wizard, {x, y}, {a, b}), do: abs(div(b - y, a - x)) == 1
+end
 
 # You May Use The Following Test Suite To Validate Your Solution.
 ExUnit.start(auto_run: false)
@@ -214,7 +222,17 @@ true
 Implement your custom character below.
 
 ```elixir
+defmodule Archer do
+  defstruct []
+end
 
+defimpl Character, for: Archer do
+  def can_attack?(_archer, {x, y}, {a, b}), do: abs(a - x) == 3 or abs(y - b) == 3
+end
+```
+
+```elixir
+Character.can_attack?(%Archer{}, {4, 4}, {7, 4})
 ```
 
 ## Commit Your Progress
