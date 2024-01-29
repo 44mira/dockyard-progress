@@ -135,9 +135,8 @@ defmodule CounterServer do
   end
 
   @impl true
-  def handle_cast(:increment, state) do
-    {:noreply, state + 1}
-  end
+  def handle_cast(:increment, state), do: {:noreply, state + 1}
+  def handle_cast(:decrement, state), do: {:noreply, state - 1}
 
   @impl true
   def handle_call(:get_count, _from, state) do
@@ -152,7 +151,7 @@ Using the GenServer above, here's an example of sending an asynchronous message 
 
 ```elixir
 {:ok, pid} = GenServer.start_link(CounterServer, [])
-GenServer.cast(pid, :increment)
+GenServer.cast(pid, :decrement)
 GenServer.call(pid, :get_count)
 ```
 
@@ -382,15 +381,13 @@ defmodule SendingSelfExample do
 
   def handle_call(:talking_to_myself, _from, state) do
     Process.sleep(1000)
-    IO.puts("Talking to myself")
-    GenServer.call(self(), :talking_to_myself)
+
     {:reply, "response", state}
   end
 
   def handle_cast(:talking_to_myself, state) do
     Process.sleep(1000)
-    IO.puts("Talking to myself")
-    GenServer.cast(self(), :talking_to_myself)
+
     {:noreply, state}
   end
 end
@@ -399,8 +396,8 @@ end
 Run the code below and you'll notice the process crashes with the message `process attempted to call itself`.
 
 ```elixir
-{:ok, pid} = GenServer.start(SendingSelfExample, [])
-GenServer.call(pid, :talking_to_myself)
+# {:ok, pid} = GenServer.start(SendingSelfExample, [])
+# GenServer.call(pid, :talking_to_myself)
 ```
 
 ## Debugging
