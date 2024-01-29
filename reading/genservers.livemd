@@ -476,6 +476,7 @@ defmodule ConfigurableServer do
 end
 
 ConfigurableServer.start_link(name: :example_name, state: 10)
+:sys.get_state(:example_name)
 ```
 
 ## Further Reading
