@@ -101,10 +101,14 @@ defmodule Document do
       3
   """
   def word_count(file_name) do
+    content = File.read!(file_name)
+
+    Regex.scan(~r/\w+|\d+/, content)
+    |> length
   end
 
   @doc ~S"""
-  Count the number of words in a document.
+  Count the number of lines in a document.
 
   ## Examples
 
@@ -113,6 +117,10 @@ defmodule Document do
       3
   """
   def line_count(file_name) do
+    content = File.read!(file_name)
+
+    Regex.scan(~r/.+/, content)
+    |> length
   end
 
   @doc ~S"""
@@ -126,6 +134,11 @@ defmodule Document do
       "1. one\n2. two\n3. three"
   """
   def add_line_numbers(file_name) do
+    {a, _} =
+      File.stream!(file_name)
+      |> Enum.map_reduce(1, fn x, acc -> {"#{acc}. " <> x, acc + 1} end)
+
+    File.write(file_name, Enum.join(a))
   end
 end
 ```
