@@ -109,9 +109,20 @@ defmodule Timer do
   use GenServer
 
   def start_link(_opts) do
+    {:ok, pid} = GenServer.start_link(__MODULE__, [])
+    send(pid, :start)
+    {:ok, pid}
   end
 
-  def get_time(timer_pid) do
+  def seconds(timer_pid), do: GenServer.call(timer_pid, :get_time)
+
+  def init(_init_state), do: {:ok, -1}
+
+  def handle_call(:get_time, _from, state), do: {:reply, state, state}
+
+  def handle_info(_request, state) do
+    Process.send_after(self(), :continue, 1000)
+    {:noreply, state + 1}
   end
 end
 ```
