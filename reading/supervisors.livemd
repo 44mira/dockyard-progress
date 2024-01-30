@@ -107,7 +107,7 @@ The same is true if we manually exit a process using [Process.exit/2](https://he
 
 If you would like to learn more about fault taulerance and error handling, Joe Armstrong created an incredible video on the subject.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=ZOsvgwOR6G0&ab_channel=KentComputing\")","title":"Erlang Master Class 2: Video 3 - Handling errors"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9Wk9zdmd3T1I2RzAmYWJfY2hhbm5lbD1LZW50Q29tcHV0aW5nXCIpIiwidGl0bGUiOiJFcmxhbmcgTWFzdGVyIENsYXNzIDI6IFZpZGVvIDMgLSBIYW5kbGluZyBlcnJvcnMifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=ZOsvgwOR6G0&ab_channel=KentComputing")
@@ -206,7 +206,8 @@ Process.exit(pid, :exit)
 Re-evaluate the diagram above and you should see a new `Worker` process started with a different pid. Repeat this process to kill each process under the supervisor and see them restarted.
 
 ```elixir
-
+:c.pid(0, 305, 0)
+|> Process.exit(:exit)
 ```
 
 ## Restart Strategies
@@ -383,9 +384,7 @@ Notice that `Bomb2` and `Bomb3` will never explode because their timers restart.
 
 Uncomment the line below to observe the timeline of crashes, then re-comment it.
 
-```elixir
-# {:ok, supervisor_pid} = Supervisor.start_link(children, strategy: :one_for_all, max_restarts: 5)
-```
+<!-- livebook:{"break_markdown":true} -->
 
 ### Rest For One
 
@@ -446,7 +445,9 @@ So the timeline of crashes would be:
 Start **four** `Bomb` processes under a supervisor with different bomb times. Try each restart strategy `:one_for_one`, `one_for_all`, and `:rest_for_one`. Predict the crash timeline then evaluate your code. Did the result match your prediction?
 
 ```elixir
-
+children = [
+  {Bomb, [name: "Bomb 1", bomb_time: 1000]}
+]
 ```
 
 ## Syntax Sugar
