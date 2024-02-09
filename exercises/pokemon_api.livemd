@@ -239,6 +239,10 @@ you can make a request using the `limit` query parameter with a larger value tha
 
 </details>
 
+```elixir
+
+```
+
 ## GitHub Repository
 
 Connect your `Pokelixir` project to a GitHub repository and create a README to describe the purpose of the project and what you learned building it.
